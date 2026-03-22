@@ -1,0 +1,18 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+nav {
+    background: #ddd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+button {
+    padding: 8px 12px;
+    background: black;
+    color: white;
+    border-radius: 5px;
+}
