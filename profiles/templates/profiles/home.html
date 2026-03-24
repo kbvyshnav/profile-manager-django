@@ -1,7 +1,27 @@
 {% extends 'base.html' %}
 
+{% block title %}Profile{% endblock %}
+
 {% block content %}
+
 <h1>Profiles</h1>
+
+{% if profiles %}
+    <ul>
+        {% for profile in profiles %}
+        <li>
+            <b>{{ profile.name }}</b> ({{ profile.age }})<br>
+            Role : {{ profile.role }}<br>
+            Email : {{ profile.email }}<br>
+            Active : {{ profile.is_active }}<br>
+            Joined :{{ profile.created_at|date:" d M Y " }}<br><br>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Profiles available.</p>
+{% endif %}
+
 {% endblock %}
 
 
