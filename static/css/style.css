@@ -42,3 +42,8 @@ input, select {
     padding: 8px;
     margin-bottom: 10px;
 }
+
+a {
+    text-decoration: none;
+    color: red;
+}

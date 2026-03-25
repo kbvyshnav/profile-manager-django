@@ -43,3 +43,14 @@ def update_profile(request, id):
         form = ProfileForm(instance=profile) # loads existing data into form(pre-filled)
 
     return render(request, 'profiles/add_profile.html', {'form': form})
+
+
+def delete_profile(request, id):
+    profile = get_object_or_404(Profile, id=id)
+
+    if request.method == "POST":
+        profile.delete()
+        messages.success(request, "Profile deleted successfully 🗑")
+        return redirect('home')
+
+    return render(request, 'profiles/confirm_delete.html', {'profile': profile})
