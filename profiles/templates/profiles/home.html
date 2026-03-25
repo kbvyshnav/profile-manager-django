@@ -15,6 +15,7 @@
             Email : {{ profile.email }}<br>
             Active : {{ profile.is_active }}<br>
             Joined :{{ profile.created_at|date:" d M Y " }}<br><br>
+            <a href="{% url 'update_profile' profile.id %}">Edit</a>
         </li>
         {% endfor %}
     </ul>
