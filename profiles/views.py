@@ -4,13 +4,24 @@ from .forms import ProfileForm
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 def home(request):
-    profiles = Profile.objects.filter(is_active=True)
+    query = request.GET.get('search')
+
+    profiles = Profile.objects.all().order_by('-created_at')
+
+    if query:
+        profiles = profiles.filter(
+            Q(name__icontains=query) |   #name__icontains = case-insensitive search
+            Q(role__icontains=query)      # Q() = allows OR conditions
+        )
 
     context = {
-        "profiles": profiles
+        "profiles": profiles,
+        "query": query
     }
+
     return render(request, 'profiles/home.html', context)
 
 def add_profile(request):

@@ -8,7 +8,17 @@
 
 {% if profiles %}
     <ul>
+        
+         <form method="GET">
+            <input type="text" name="search" placeholder="Search profiles..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+
+        <br>
+
         {% for profile in profiles %}
+       
+
         <li>
             <b>{{ profile.name }}</b> ({{ profile.age }})<br>
             Role : {{ profile.role }}<br>
