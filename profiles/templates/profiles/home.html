@@ -17,8 +17,6 @@
         <br>
 
         {% for profile in profiles %}
-       
-
         <li>
             <b>{{ profile.name }}</b> ({{ profile.age }})<br>
             Role : {{ profile.role }}<br>
@@ -29,6 +27,7 @@
             <a href="{% url 'delete_profile' profile.id %}">Delete</a>
         </li>
         {% endfor %}
+        
     </ul>
 {% else %}
     <p>No Profiles available.</p>

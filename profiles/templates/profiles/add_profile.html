@@ -11,7 +11,12 @@
 
     {{ form.as_p }}
 
-    <button type="submit">Save Profile</button>
+    {% if form.instance.pk %}
+        <button type="submit">Update Profile</button>
+    {% else %}
+        <button type="submit">Save Profile</button>
+    {% endif %}
+    
 </form>
 
 {% endblock %}
