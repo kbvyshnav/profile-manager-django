@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 def home(request):
     query = request.GET.get('search')
@@ -13,12 +14,16 @@ def home(request):
 
     if query:
         profiles = profiles.filter(
-            Q(name__icontains=query) |   #name__icontains = case-insensitive search
-            Q(role__icontains=query)      # Q() = allows OR conditions
+            Q(name__icontains=query) |
+            Q(role__icontains=query)
         )
 
+    paginator = Paginator(profiles, 2)  # 2 per page (testing)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "profiles": profiles,
+        "profiles": page_obj,   # ✅ IMPORTANT FIX
         "query": query
     }
 
