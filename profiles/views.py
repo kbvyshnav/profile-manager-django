@@ -6,9 +6,11 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required                    #Protect Pages
 
+@login_required
 def home(request):
-    query = request.GET.get('search')
+    query = request.GET.get('search', '').strip()
 
     profiles = Profile.objects.all().order_by('-created_at')
 
@@ -29,6 +31,7 @@ def home(request):
 
     return render(request, 'profiles/home.html', context)
 
+@login_required
 def add_profile(request):
 
     if request.method == "POST":
@@ -44,6 +47,7 @@ def add_profile(request):
 
     return render(request, 'profiles/add_profile.html', {'form': form})
 
+@login_required
 def update_profile(request, id):
     profile = get_object_or_404(Profile, id=id) # safely fetches object, avoids crash if not found
 
@@ -60,7 +64,7 @@ def update_profile(request, id):
 
     return render(request, 'profiles/add_profile.html', {'form': form})
 
-
+@login_required
 def delete_profile(request, id):
     profile = get_object_or_404(Profile, id=id)
 

@@ -35,15 +35,15 @@
     <!-- 📄 Pagination -->
     <div>
         {% if profiles.has_previous %}
-            <a href="?search={{ query }}&page=1">First</a>
-            <a href="?search={{ query }}&page={{ profiles.previous_page_number }}">Previous</a>
+            <a href="?{% if query %}search={{ query }}&{% endif %}page=1">First</a>
+            <a href="?{% if query %}search={{ query }}&{% endif %}page={{ profiles.previous_page_number }}">Previous</a>
         {% endif %}
 
         <span>Page {{ profiles.number }} of {{ profiles.paginator.num_pages }}</span>
 
         {% if profiles.has_next %}
-            <a href="?search={{ query }}&page={{ profiles.next_page_number }}">Next</a>
-            <a href="?search={{ query }}&page={{ profiles.paginator.num_pages }}">Last</a>
+            <a href="?{% if query %}search={{ query }}&{% endif %}page={{ profiles.next_page_number }}">Next</a>
+            <a href="?{% if query %}search={{ query }}&{% endif %}page={{ profiles.paginator.num_pages }}">Last</a>
         {% endif %}
     </div>
 
