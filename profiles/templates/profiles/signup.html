@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<h2>Create Account</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        Username:<br>
+        {{ form.username }}<br>
+        <small>{{ form.username.help_text }}</small>
+        <br>
+        {{ form.username.errors }}
+    </p>
+
+    <p>
+        Password:<br>
+        {{ form.password1 }}<br>
+        {{ form.password1.errors }}
+    </p>
+
+    <p>
+        Confirm Password:<br>
+        {{ form.password2 }}<br>
+        {{ form.password2.errors }}
+    </p>
+
+    <button type="submit">Signup</button>
+</form>
+
+{% endblock %}

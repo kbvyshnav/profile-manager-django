@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required                    #Protect Pages
+from .forms import SignupForm
+from django.contrib.auth import login
 
 @login_required
 def home(request):
@@ -74,3 +76,22 @@ def delete_profile(request, id):
         return redirect('home')
 
     return render(request, 'profiles/confirm_delete.html', {'profile': profile})
+
+
+################### Signup page view ######################
+def signup(request):
+
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # auto login after signup
+
+            messages.success(request, "Account created successfully 🎉")
+            return redirect('home')
+
+    else:
+        form = SignupForm()
+
+    return render(request, 'profiles/signup.html', {'form': form})
